@@ -4,8 +4,18 @@ import numpy as np
 from ultralytics import YOLO
 from PIL import Image
 
-# Load YOLO model
-model = YOLO('yolov8n-person.pt')
+model_options = {
+    "Person Detection": "yolov8n-person.pt",
+    "Face Detection": "yolov8n-face.pt",
+    "Football Detection":"yolov8n-football.pt",
+    #Model options
+}
+
+st.sidebar.title("Model Selection")
+selected_model = st.sidebar.selectbox("Choose a YOLO model", list(model_options.keys()))
+
+# Load the selected YOLO model
+model = YOLO(model_options[selected_model])
 
 def process_image(image):
     image = np.array(image)
@@ -28,21 +38,19 @@ st.title("YOLOv8 Image Object Detection and Removal")
 uploaded_file = st.file_uploader("Choose an image...", type=["jpg", "png"])
 
 if uploaded_file is not None:
-    # Convert the uploaded file to an image
     image = Image.open(uploaded_file).convert('RGB')
     
-    # Process the image
     labeled_image, removed_objects_image = process_image(image)
     
-    # Convert BGR to RGB for accurate display and download
+    #Convert BGR to RGB for accurate display and download
     labeled_image_rgb = cv2.cvtColor(labeled_image, cv2.COLOR_BGR2RGB)
     removed_objects_image_rgb = cv2.cvtColor(removed_objects_image, cv2.COLOR_BGR2RGB)
     
-    # Determine the file extension and MIME type based on the uploaded file
+    #Determine the file extension and MIME type based on the uploaded file
     file_extension = uploaded_file.name.split('.')[-1].lower()
     mime_type = f'image/{file_extension}'
     
-    # Display the original, labeled, and object-removed images
+    #Display the original, labeled, and object-removed images
     st.image(image, caption="Original Image", use_column_width=True)
     st.image(labeled_image, caption="Image with Labels", use_column_width=True)
     
