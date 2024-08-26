@@ -4,6 +4,7 @@ ultralytics
 pillow
 numpy
 dill
+omegaconf
 # Ultralytics requirements
 # Usage: pip install -r requirements.txt
 
