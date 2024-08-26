@@ -1,8 +1,10 @@
 from ultralytics import YOLO
 import cv2
 import numpy as np
+import urllib.request
 
-#Load yolov8
+model_url = "https://github.com/akanametov/yolov8-face/releases/download/v0.0.0/yolov8n-person.pt"
+urllib.request.urlretrieve(model_url, "yolov8n-person.pt")
 model = YOLO('yolov8n-person.pt')  # Replace with the correct model file path
 
 #Input image
