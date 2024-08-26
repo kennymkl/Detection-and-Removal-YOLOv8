@@ -3,6 +3,7 @@ opencv-python-headless
 ultralytics
 pillow
 numpy
+dill
 # Ultralytics requirements
 # Usage: pip install -r requirements.txt
 
