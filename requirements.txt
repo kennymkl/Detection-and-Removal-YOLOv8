@@ -1,5 +1,8 @@
-opencv-python
+streamlit
+opencv-python-headless
 ultralytics
+pillow
+numpy
 # Ultralytics requirements
 # Usage: pip install -r requirements.txt
 
